@@ -2,6 +2,7 @@ import { useParams } from "react-router-dom";
 import { useEffect, useState } from "react";
 import api from "../services/api";
 import { useCart } from "../context/CartContext";
+import Navbar from "./components/Navbar";
 
 export default function ProductDetail() {
   const { id } = useParams();
@@ -77,6 +78,8 @@ export default function ProductDetail() {
   }
 
   return (
+    <>
+        <Navbar/>
     <div className="p-4">
       <img
         src={product.image}
@@ -160,5 +163,6 @@ export default function ProductDetail() {
         Add To Cart
       </button>
     </div>
+    </>
   );
 }

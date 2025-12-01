@@ -3,7 +3,7 @@ import api from "../services/api";
 import { useNavigate } from "react-router-dom";
 import { isAuthenticated } from "../utils/auth";
 
-
+import Navbar from "./components/Navbar";
 
 
 export default function Checkout() {
@@ -85,6 +85,8 @@ export default function Checkout() {
   };
 
   return (
+    <>
+        <Navbar/>
     <div className="p-6 max-w-md mx-auto border rounded-lg shadow bg-gray-50">
       <h2 className="text-xl font-bold mb-4">Checkout</h2>
 
@@ -125,5 +127,6 @@ export default function Checkout() {
         )}
       </button>
     </div>
+    </>
   );
 }

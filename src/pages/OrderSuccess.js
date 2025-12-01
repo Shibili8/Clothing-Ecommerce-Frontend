@@ -1,9 +1,11 @@
 import { useParams, Link } from "react-router-dom";
-
+import Navbar from "./components/Navbar";
 export default function OrderSuccess() {
   const { id } = useParams();
 
   return (
+    <>
+        <Navbar/>
     <div className="text-center p-10">
       <h1 className="text-3xl font-bold">Order Successful!</h1>
       <p className="mt-2">Your order ID:</p>
@@ -12,5 +14,6 @@ export default function OrderSuccess() {
         Purchase more products
       </Link>
     </div>
+    </>
   );
 }

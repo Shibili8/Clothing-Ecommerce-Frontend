@@ -1,7 +1,9 @@
 import { Link } from "react-router-dom";
-
+import Navbar from "./components/Navbar";
 export default function Home() {
   return (
+    <>
+        <Navbar/>
     <div className="text-center mt-10">
       <h1 className="text-3xl font-bold">Welcome to Our Store</h1>
       <p className="text-gray-600 mt-3 max-w-md mx-auto">
@@ -15,5 +17,6 @@ export default function Home() {
         Shop Now
       </Link>
     </div>
+    </>
   );
 }

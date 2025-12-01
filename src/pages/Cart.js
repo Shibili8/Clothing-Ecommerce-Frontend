@@ -4,6 +4,7 @@ import { isAuthenticated } from "../utils/auth";
 import { isLoggedInUser } from "../utils/auth";
 import { Link } from "react-router-dom";
 import { useCart } from "../context/CartContext";
+import Navbar from "./components/Navbar";
 
 export default function Cart() {
   const [cart, setCart] = useState([]);
@@ -135,6 +136,8 @@ export default function Cart() {
   const totalItems = cart.length
 
   return (
+    <>
+    <Navbar/>
     <div className="p-6">
       <h2 className="text-2xl font-bold mb-6">Your Cart</h2>
 
@@ -218,5 +221,6 @@ export default function Cart() {
         </div>
       </div>
     </div>
+    </>
   );
 }

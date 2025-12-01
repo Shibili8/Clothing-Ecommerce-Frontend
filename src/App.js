@@ -1,5 +1,5 @@
 import { Routes, Route, Navigate } from "react-router-dom";
-import Navbar from "./components/Navbar";
+
 import Home from "./pages/Home";
 import Products from "./pages/Products";
 import ProductDetail from "./pages/ProductDetail";
@@ -18,7 +18,7 @@ function App() {
 
   return (
     <>
-      <Navbar />
+      
 
       <div className="max-w-5xl mx-auto p-4">
         <Routes>
