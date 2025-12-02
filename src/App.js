@@ -1,5 +1,4 @@
 import { Routes, Route, Navigate } from "react-router-dom";
-import { useEffect, useState } from "react";
 
 import Home from "./pages/Home";
 import Products from "./pages/Products";
@@ -14,22 +13,14 @@ import OrderSuccess from "./pages/OrderSuccess";
 import RequireRealAuth from "./components/RequireAuth";
 
 function App() {
-  const [authState, setAuthState] = useState(localStorage.getItem("auth"));
-
-  // Listen for login/logout changes
-  useEffect(() => {
-    const syncAuth = () => setAuthState(localStorage.getItem("auth"));
-    window.addEventListener("storage", syncAuth);
-
-    return () => window.removeEventListener("storage", syncAuth);
-  }, []);
-
-  const isAllowed = authState === "true" || authState === "guest";
+  // Read from localStorage on every render
+  const auth = localStorage.getItem("auth"); // "true", "guest", or null
+  const isAllowed = auth === "true" || auth === "guest";
 
   return (
     <div className="max-w-5xl mx-auto p-4">
       <Routes>
-        {/* Home */}
+        {/* Home (guest + logged-in allowed) */}
         <Route
           path="/"
           element={isAllowed ? <Home /> : <Navigate to="/login" />}
@@ -41,10 +32,10 @@ function App() {
         {/* Cart allowed for all */}
         <Route path="/cart" element={<Cart />} />
 
-        {/* Checkout only for logged users */}
+        {/* Checkout (your own logic inside Checkout can block guests) */}
         <Route path="/checkout" element={<Checkout />} />
 
-        {/* Order success only for logged users */}
+        {/* Order success only for real logged user */}
         <Route
           path="/order-success/:id"
           element={
