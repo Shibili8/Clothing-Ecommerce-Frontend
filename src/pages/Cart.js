@@ -113,6 +113,9 @@ export default function Cart() {
   // Empty cart check
   if (cart.length === 0) {
     return (
+      <>
+      <Navbar/>
+      
       <div className="p-6 text-center">
         <p className="text-gray-600 text-lg font-medium">
           No products added to Cart.
@@ -124,6 +127,7 @@ export default function Cart() {
           Shop Now
         </Link>
       </div>
+      </>
     );
   }
 
