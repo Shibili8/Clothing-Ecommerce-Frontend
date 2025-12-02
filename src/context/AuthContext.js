@@ -1,13 +1,18 @@
-import { createContext, useContext, useState } from "react";
+import { createContext, useState } from "react";
 
-const AuthContext = createContext();
+export const AuthContext = createContext();
 
 export function AuthProvider({ children }) {
-  const [auth, setAuth] = useState(localStorage.getItem("auth"));
+  const [auth, setAuth] = useState(localStorage.getItem("auth") || null);
 
   const login = () => {
     localStorage.setItem("auth", "true");
     setAuth("true");
+  };
+
+  const guestLogin = () => {
+    localStorage.setItem("auth", "guest");
+    setAuth("guest");
   };
 
   const logout = () => {
@@ -16,10 +21,8 @@ export function AuthProvider({ children }) {
   };
 
   return (
-    <AuthContext.Provider value={{ auth, login, logout }}>
+    <AuthContext.Provider value={{ auth, login, guestLogin, logout }}>
       {children}
     </AuthContext.Provider>
   );
 }
-
-export const useAuth = () => useContext(AuthContext);

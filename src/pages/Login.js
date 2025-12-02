@@ -1,33 +1,36 @@
-import { useState } from "react";
-import api from "../services/api";
+import { useState, useContext } from "react";
 import { useNavigate, Link } from "react-router-dom";
+import api from "../services/api";
+import { AuthContext } from "../context/AuthContext";
 
 export default function Login() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const navigate = useNavigate();
 
-  const login = async () => {
+  // get login + guestLogin FROM CONTEXT
+  const { login: authLogin, guestLogin: authGuestLogin } = useContext(AuthContext);
+
+  const handleLogin = async () => {
     try {
-      // IMPORTANT: Pass withCredentials so JWT cookie gets stored
       await api.post(
         "/auth/login",
         { email, password },
         { withCredentials: true }
       );
 
-      // Mark user as logged in
-      localStorage.setItem("auth", "true");
-      console.log("Logged")
-      navigate("/");
+      authLogin(); // ✔ updates context + localStorage
+      console.log("Logged");
+      navigate("/"); // ✔ now actually redirects
+
     } catch (err) {
       console.log("Login error:", err.response?.data);
       alert("Invalid credentials!");
     }
   };
 
-  const guestLogin = () => {
-    localStorage.setItem("auth", "guest");
+  const handleGuestLogin = () => {
+    authGuestLogin(); // ✔ updates auth context
     navigate("/");
   };
 
@@ -50,14 +53,14 @@ export default function Login() {
 
       <button
         className="w-full bg-gray-900 text-white py-3 rounded"
-        onClick={login}
+        onClick={handleLogin}
       >
         Login
       </button>
 
       <button
         className="w-full bg-gray-700 text-white py-3 rounded mt-3"
-        onClick={guestLogin}
+        onClick={handleGuestLogin}
       >
         Continue as Guest
       </button>
@@ -67,7 +70,7 @@ export default function Login() {
       </Link>
 
       <p className="mt-3">
-        Don't have an account?{" "}
+        Don’t have an account?{" "}
         <Link to="/register" className="text-blue-600">
           Register
         </Link>
