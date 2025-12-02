@@ -8,6 +8,7 @@ export default function Products() {
   const [filters, setFilters] = useState({});
   const [page, setPage] = useState(1);
   const [totalPages, setTotalPages] = useState(1);
+  console.log("FilterBar = ", FilterBar);
 
   const fetchProducts = async () => {
     try {
