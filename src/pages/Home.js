@@ -7,7 +7,9 @@ export default function Home() {
     <div className="text-center mt-10">
       <h1 className="text-3xl font-bold">Welcome to Our Store</h1>
       <p className="text-gray-600 mt-3 max-w-md mx-auto">
-        Clean CRM-style UI built with React + TailwindCSS (CDN).
+        Your one-stop destination for premium clothing.
+From everyday wear to exclusive collections, explore high-quality outfits designed for comfort, style, and durability.
+Shop confidently with fast checkout and seamless delivery.
       </p>
 
       <Link
