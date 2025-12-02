@@ -7,7 +7,6 @@ export default function FilterBar({ onFilter }) {
   const [minPrice, setMinPrice] = useState("");
   const [maxPrice, setMaxPrice] = useState("");
 
-  // Send all filters to parent (Products.jsx)
   const applyFilters = () => {
     onFilter({
       search,
@@ -25,7 +24,7 @@ export default function FilterBar({ onFilter }) {
       <input
         type="text"
         className="border p-2 rounded"
-        placeholder="Search product..."
+        placeholder="Search..."
         value={search}
         onChange={(e) => setSearch(e.target.value)}
       />
