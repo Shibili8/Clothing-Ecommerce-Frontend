@@ -20,7 +20,6 @@ export default function FilterBar({ onFilter }) {
   return (
     <div className="p-4 mb-4 border rounded-lg shadow bg-white grid gap-4 md:grid-cols-2 lg:grid-cols-4">
 
-      {/* Search */}
       <input
         type="text"
         className="border p-2 rounded"
@@ -29,7 +28,6 @@ export default function FilterBar({ onFilter }) {
         onChange={(e) => setSearch(e.target.value)}
       />
 
-      {/* Category */}
       <select
         className="border p-2 rounded"
         value={category}
@@ -41,7 +39,6 @@ export default function FilterBar({ onFilter }) {
         <option value="Kids">Kids</option>
       </select>
 
-      {/* Size */}
       <select
         className="border p-2 rounded"
         value={size}
@@ -54,7 +51,6 @@ export default function FilterBar({ onFilter }) {
         <option value="XL">XL</option>
       </select>
 
-      {/* Price Range */}
       <div className="flex gap-2">
         <input
           type="number"

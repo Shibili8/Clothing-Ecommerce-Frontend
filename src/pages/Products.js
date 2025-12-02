@@ -25,7 +25,6 @@ export default function Products() {
     }
   };
 
-  // Fetch when filters or page changes
   useEffect(() => {
     fetchProducts();
   }, [filters, page]);
@@ -38,10 +37,8 @@ export default function Products() {
 
       <h1 className="text-2xl font-bold mb-4">Products</h1>
 
-      {/* FILTER BAR */}
       <FilterBar onFilter={(data) => { setFilters(data); setPage(1); }} />
 
-      {/* PRODUCTS LIST */}
       <div className="grid grid-cols-2 md:grid-cols-3 gap-6">
         {products.map((p) => (
           <Link
@@ -62,7 +59,6 @@ export default function Products() {
         ))}
       </div>
 
-      {/* PAGINATION */}
       <div className="flex justify-center gap-3 mt-6">
         <button
           disabled={page === 1}

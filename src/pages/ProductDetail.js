@@ -35,17 +35,16 @@ export default function ProductDetail() {
 
     const auth = localStorage.getItem("auth");
 
-    // LOGGED-IN USER
     if (auth === "true") {
       try {
         await api.post("/cart/add", {
-          productId: product._id,
-          size: selectedSize,
-          qty,
-        }, { withCredentials: true });
+            productId: product._id,
+            size: selectedSize,
+            qty,
+          }, { withCredentials: true }
+        );
 
-
-        loadCartCount(); // update navbar badge
+        loadCartCount(); 
         alert("Added to cart!");
         return;
       } catch (err) {
@@ -55,7 +54,6 @@ export default function ProductDetail() {
       }
     }
 
-    // GUEST USER — save in localStorage
     const cart = JSON.parse(localStorage.getItem("cart")) || [];
     cart.push({
       _id: product._id,
@@ -72,7 +70,6 @@ export default function ProductDetail() {
     alert("Added to cart!");
   };
 
-  // ⛔ THIS MUST BE INSIDE THE COMPONENT
   if (!product) {
     return <p className="p-6">Loading...</p>;
   }

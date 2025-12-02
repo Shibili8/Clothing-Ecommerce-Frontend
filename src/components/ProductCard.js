@@ -11,7 +11,6 @@ export default function ProductCard({ product }) {
 
       <h3 className="font-semibold mt-2 text-lg">{product.name}</h3>
 
-      {/* Price + Stock Row */}
       <div className="flex justify-between items-center mt-1">
         <p className="text-gray-800 font-semibold">₹{product.price}</p>
 

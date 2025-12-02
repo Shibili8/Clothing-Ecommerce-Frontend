@@ -2,12 +2,12 @@ import { useEffect, useState } from "react";
 import api from "../services/api";
 import { useNavigate } from "react-router-dom";
 import { isAuthenticated } from "../utils/auth";
-import { useCart } from "../context/CartContext";   // ✅ IMPORT FIXED
+import { useCart } from "../context/CartContext"; 
 import Navbar from "../components/Navbar";
 
 export default function Checkout() {
   const navigate = useNavigate();
-  const { loadCartCount } = useCart(); // ✅ USE CART CONTEXT
+  const { loadCartCount } = useCart(); 
 
   const [cart, setCart] = useState([]);
   const [totalItems, setTotalItems] = useState(0);
@@ -23,7 +23,6 @@ export default function Checkout() {
     }
   }, []);
 
-  // 1️⃣ Logged-in user → MongoDB cart
   const loadServerCart = async () => {
     try {
       const res = await api.get("/cart", { withCredentials: true });
@@ -38,7 +37,6 @@ export default function Checkout() {
     }
   };
 
-  // 2️⃣ Guest user → localStorage cart
   const loadGuestCart = () => {
     const localCart = JSON.parse(localStorage.getItem("cart")) || [];
     setCart(localCart);
@@ -47,7 +45,7 @@ export default function Checkout() {
     setTotalPrice(localCart.reduce((sum, i) => sum + i.qty * i.price, 0));
   };
 
-  // 3️⃣ Place order → logged user only
+  
   const placeOrder = async () => {
     if (loading) return;
 
@@ -66,7 +64,6 @@ export default function Checkout() {
 
       const res = await api.post("/orders", {}, { withCredentials: true });
 
-      // ✅ FIX: Update Navbar cart count immediately
       await loadCartCount(); 
 
       navigate(`/order-success/${res.data._id}`);
@@ -93,7 +90,6 @@ export default function Checkout() {
       <div className="p-6 max-w-md mx-auto border rounded-lg shadow bg-gray-50">
         <h2 className="text-xl font-bold mb-4">Checkout</h2>
 
-        {/* ORDER SUMMARY */}
         <div className="border rounded p-4 bg-white shadow mb-6">
           <div className="flex justify-between text-gray-700 mb-2">
             <span>Total Items:</span>
@@ -106,7 +102,6 @@ export default function Checkout() {
           </div>
         </div>
 
-        {/* PLACE ORDER BUTTON */}
         <button
           onClick={placeOrder}
           disabled={loading || totalItems === 0}

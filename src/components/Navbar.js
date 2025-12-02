@@ -9,7 +9,6 @@ export default function Navbar() {
   const { cartCount, loadCartCount } = useCart();
   const navigate = useNavigate();
 
-  // ✅ Correct: Use AuthContext INSIDE the component
   const { auth, logout } = useContext(AuthContext);
 
   const isLoggedIn = auth === "true";
@@ -22,7 +21,7 @@ export default function Navbar() {
       console.log("Logout error:", err);
     }
 
-    logout(); // clears context + localStorage
+    logout(); 
     loadCartCount();
     navigate("/login");
   };

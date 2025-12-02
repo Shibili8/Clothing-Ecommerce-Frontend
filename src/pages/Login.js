@@ -8,7 +8,6 @@ export default function Login() {
   const [password, setPassword] = useState("");
   const navigate = useNavigate();
 
-  // get login + guestLogin FROM CONTEXT
   const { login: authLogin, guestLogin: authGuestLogin } = useContext(AuthContext);
 
   const handleLogin = async () => {
@@ -19,9 +18,9 @@ export default function Login() {
         { withCredentials: true }
       );
 
-      authLogin(); // ✔ updates context + localStorage
+      authLogin(); 
       console.log("Logged");
-      navigate("/"); // ✔ now actually redirects
+      navigate("/"); 
 
     } catch (err) {
       console.log("Login error:", err.response?.data);
@@ -30,7 +29,7 @@ export default function Login() {
   };
 
   const handleGuestLogin = () => {
-    authGuestLogin(); // ✔ updates auth context
+    authGuestLogin(); 
     navigate("/");
   };
 
