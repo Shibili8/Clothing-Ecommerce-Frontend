@@ -14,17 +14,14 @@ import ResetPassword from "./pages/ResetPassword";
 import OrderSuccess from "./pages/OrderSuccess";
 import RequireRealAuth from "./components/RequireAuth";
 
-function App() {
-
-  // 🔥 READ AUTH STATE FROM CONTEXT (NOT localStorage)
-  const { auth } = useContext(AuthContext);
+export default function App() {
+  const { auth } = useContext(AuthContext); // 👈 READ FROM CONTEXT ONLY
 
   const isAllowed = auth === "true" || auth === "guest";
 
   return (
     <div className="max-w-5xl mx-auto p-4">
       <Routes>
-
         <Route
           path="/"
           element={isAllowed ? <Home /> : <Navigate to="/login" />}
@@ -55,5 +52,3 @@ function App() {
     </div>
   );
 }
-
-export default App;
