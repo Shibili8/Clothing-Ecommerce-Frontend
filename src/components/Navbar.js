@@ -1,25 +1,28 @@
 import { Link, useNavigate } from "react-router-dom";
-import { useState } from "react";
+import { useState, useContext } from "react";
 import { useCart } from "../context/CartContext";
 import api from "../services/api";
+import { AuthContext } from "../context/AuthContext";
 
 export default function Navbar() {
   const [open, setOpen] = useState(false);
   const { cartCount, loadCartCount } = useCart();
   const navigate = useNavigate();
 
-  const isLoggedIn = localStorage.getItem("auth") === "true";
+  // ✅ Correct: Use AuthContext INSIDE the component
+  const { auth, logout } = useContext(AuthContext);
+
+  const isLoggedIn = auth === "true";
+  const isGuest = auth === "guest";
 
   const handleLogout = async () => {
     try {
-      await api.post("/auth/logout");   // Clear cookie
+      await api.post("/auth/logout");
     } catch (err) {
       console.log("Logout error:", err);
     }
 
-    localStorage.removeItem("auth");
-    localStorage.removeItem("cart");
-
+    logout(); // clears context + localStorage
     loadCartCount();
     navigate("/login");
   };
@@ -48,7 +51,7 @@ export default function Navbar() {
           )}
         </Link>
 
-        {isLoggedIn ? (
+        {isLoggedIn || isGuest ? (
           <button onClick={handleLogout} className="block py-2 text-red-400">
             Logout
           </button>

@@ -15,7 +15,7 @@ import OrderSuccess from "./pages/OrderSuccess";
 import RequireRealAuth from "./components/RequireAuth";
 
 export default function App() {
-  const { auth } = useContext(AuthContext); // 👈 READ FROM CONTEXT ONLY
+  const { auth } = useContext(AuthContext);
 
   const isAllowed = auth === "true" || auth === "guest";
 
@@ -29,7 +29,6 @@ export default function App() {
 
         <Route path="/products" element={<Products />} />
         <Route path="/product/:id" element={<ProductDetail />} />
-
         <Route path="/cart" element={<Cart />} />
 
         <Route path="/checkout" element={<Checkout />} />
@@ -45,7 +44,6 @@ export default function App() {
 
         <Route path="/login" element={<Login />} />
         <Route path="/register" element={<Register />} />
-
         <Route path="/forgot-password" element={<ForgotPassword />} />
         <Route path="/reset-password/:token" element={<ResetPassword />} />
       </Routes>
