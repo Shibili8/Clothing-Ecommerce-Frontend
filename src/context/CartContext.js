@@ -9,21 +9,16 @@ export const CartProvider = ({ children }) => {
 
   const loadCartCount = async () => {
     try {
-      // LOGGED IN USER → fetch from backend
       if (isAuthenticated() === "true") {
         const res = await api.get("/cart", { withCredentials: true });
 
-        const items = res.data.items || [];
-        const count = items.reduce((sum, item) => sum + item.qty, 0);
+        const count =
+          res.data.items?.reduce((sum, item) => sum + item.qty, 0) || 0;
 
         setCartCount(count);
-      }
-
-      // GUEST → use localStorage
-      else {
+      } else {
         const local = JSON.parse(localStorage.getItem("cart")) || [];
-        const count = local.reduce((sum, item) => sum + item.qty, 0);
-
+        const count = local.reduce((t, item) => t + item.qty, 0);
         setCartCount(count);
       }
     } catch (err) {
