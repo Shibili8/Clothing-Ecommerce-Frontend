@@ -2,7 +2,7 @@ import { useParams } from "react-router-dom";
 import { useEffect, useState } from "react";
 import api from "../services/api";
 import { useCart } from "../context/CartContext";
-import Navbar from "./components/Navbar";
+import Navbar from "../components/Navbar";
 
 export default function ProductDetail() {
   const { id } = useParams();

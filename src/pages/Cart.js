@@ -4,7 +4,7 @@ import { isAuthenticated } from "../utils/auth";
 import { isLoggedInUser } from "../utils/auth";
 import { Link } from "react-router-dom";
 import { useCart } from "../context/CartContext";
-import Navbar from "./components/Navbar";
+import Navbar from "../components/Navbar";
 
 export default function Cart() {
   const [cart, setCart] = useState([]);

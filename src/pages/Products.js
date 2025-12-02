@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import api from "../services/api";
 import FilterBar from "../components/FilterBar";
 import { Link } from "react-router-dom";
+import Navbar from "../components/Navbar";
 
 export default function Products() {
   const [products, setProducts] = useState([]);
@@ -30,6 +31,9 @@ export default function Products() {
   }, [filters, page]);
 
   return (
+    <>
+    <Navbar/>
+    
     <div className="max-w-5xl mx-auto">
 
       <h1 className="text-2xl font-bold mb-4">Products</h1>
@@ -80,5 +84,6 @@ export default function Products() {
       </div>
 
     </div>
+    </>
   );
 }

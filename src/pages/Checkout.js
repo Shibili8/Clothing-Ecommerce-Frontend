@@ -3,7 +3,7 @@ import api from "../services/api";
 import { useNavigate } from "react-router-dom";
 import { isAuthenticated } from "../utils/auth";
 import { useCart } from "../context/CartContext";   // ✅ IMPORT FIXED
-import Navbar from "./components/Navbar";
+import Navbar from "../components/Navbar";
 
 export default function Checkout() {
   const navigate = useNavigate();
