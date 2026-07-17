@@ -11,7 +11,7 @@ export const CartProvider = ({ children }) => {
     try {
       if (isAuthenticated() === "true") {
         const res = await api.get("/cart", { withCredentials: true });
-
+        console.log(res.json)
         const count =
           res.data.items.length
 
