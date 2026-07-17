@@ -9,7 +9,6 @@ export default function Checkout() {
   const navigate = useNavigate();
   const { loadCartCount } = useCart(); 
 
-  const [cart, setCart] = useState([]);
   const [totalItems, setTotalItems] = useState(0);
   const [totalPrice, setTotalPrice] = useState(0);
   const [loading, setLoading] = useState(false);
@@ -28,7 +27,6 @@ export default function Checkout() {
       const res = await api.get("/cart", { withCredentials: true });
 
       const items = res.data.items || [];
-      setCart(items);
 
       setTotalItems(items.reduce((sum, i) => sum + i.qty, 0));
       setTotalPrice(items.reduce((sum, i) => sum + i.qty * i.price, 0));
@@ -39,7 +37,6 @@ export default function Checkout() {
 
   const loadGuestCart = () => {
     const localCart = JSON.parse(localStorage.getItem("cart")) || [];
-    setCart(localCart);
 
     setTotalItems(localCart.reduce((sum, i) => sum + i.qty, 0));
     setTotalPrice(localCart.reduce((sum, i) => sum + i.qty * i.price, 0));

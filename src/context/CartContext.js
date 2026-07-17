@@ -11,14 +11,13 @@ export const CartProvider = ({ children }) => {
     try {
       if (isAuthenticated() === "true") {
         const res = await api.get("/cart", { withCredentials: true });
-        console.log(res.json)
         const count =
           res.data.items.length
 
         setCartCount(count);
       } else {
         const local = JSON.parse(localStorage.getItem("cart")) || [];
-        const count = local.reduce((t, item) => t + item.qty, 0);
+        const count = local.length;
         setCartCount(count);
       }
     } catch (err) {

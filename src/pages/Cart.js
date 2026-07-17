@@ -81,7 +81,6 @@ export default function Cart() {
 
     if (newQty === 0) {
       return removeItem(item); 
-      loadCartCount();
     }
 
     if (isAuthenticated() === "true") {

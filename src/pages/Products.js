@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect, useState, useCallback } from "react";
 import api from "../services/api";
 import FilterBar from "../components/FilterBar";
 import { Link } from "react-router-dom";
@@ -10,23 +10,26 @@ export default function Products() {
   const [page, setPage] = useState(1);
   const [totalPages, setTotalPages] = useState(1);
 
-  const fetchProducts = async () => {
-    try {
-      const params = { page, limit: 10, ...filters };
+  const fetchProducts = useCallback(async () => {
+  try {
+    const params = {
+      page,
+      limit: 10,
+      ...filters,
+    };
 
-      const res = await api.get("/products", { params });
+    const res = await api.get("/products", { params });
 
-      setProducts(res.data.products);
-      setTotalPages(res.data.totalPages);
-
-    } catch (err) {
-      console.log("Product load error:", err.response?.data || err);
-    }
-  };
+    setProducts(res.data.products);
+    setTotalPages(res.data.totalPages);
+  } catch (err) {
+    console.log(err);
+  }
+}, [page, filters]);
 
   useEffect(() => {
-    fetchProducts();
-  }, [filters, page]);
+  fetchProducts();
+}, [fetchProducts]);
 
   return (
     <>
