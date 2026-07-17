@@ -8,7 +8,7 @@ import Navbar from "../components/Navbar";
 
 export default function Cart() {
   const [cart, setCart] = useState([]);
-  const loadCartCount  = useCart();
+  const {loadCartCount}  = useCart();
 
   useEffect(() => {
     loadCart();
