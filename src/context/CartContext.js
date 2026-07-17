@@ -13,7 +13,7 @@ export const CartProvider = ({ children }) => {
         const res = await api.get("/cart", { withCredentials: true });
 
         const count =
-          res.data.items.length|| 0;
+          res.data.items.length
 
         setCartCount(count);
       } else {
